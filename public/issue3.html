@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title id="issueName_title">WebP Image in Firefox</title>
+        <link href="site.css" rel="stylesheet" type="text/css" media="screen">
+    </head>
+    <body>
+        <h1>Issue Name: <span id="issueName_heading">WebP Image in Firefox</span></h1>
+        <section>
+            <h2>Issue Type: 
+                <span id="issueType">Visual</span>
+                <select id="selectIssueType" hidden>
+                    <option selected disabled hidden id="defaultOptionIssueType">Visual</option>
+                    <option>Visual</option>
+                    <option>Functionality</option>
+                    <option>Other</option>
+                </select>
+            </h2>
+        </section>
+        <section>
+            <h2>Issue Description:</h2>
+        </section>
+        <pre contenteditable="false" id="issueDescription">
+Look at this picture of a cat. It's beautiful. It
+isn't as beautiful in Firefox. There, it's just my
+alt text.</pre>
+        <a href="cat.webp"><img src="cat.webp" alt="A webp image of a cat."></a>
+        <a href="nocat.jpeg"><img width="640" height="360" src="nocat.jpeg" alt="A screenshot of this webpage in Firefox, where the alt text is showing for the cat image."></a>
+        <div>
+            <button id="editButton" onclick="editMode()">Edit</button>
+            <button hidden id="saveButton" onclick="saveEdit()">Save</button>
+            <button hidden id="cancelButton" onclick="cancelEdit()">Cancel</button>
+        </div>
+        <script>
+                var issueDescription = document.getElementById('issueDescription');
+                var saveButton = document.getElementById('saveButton');
+                var cancelButton = document.getElementById('cancelButton');
+                var editButton = document.getElementById('editButton');
+                var issueName_title = document.getElementById('issueName_title');
+                var issueName_heading = document.getElementById('issueName_heading');
+                var issueType = document.getElementById('issueType');
+                var selectIssueType = document.getElementById('selectIssueType');
+                var defaultOptionIssueType = document.getElementById('defaultOptionIssueType');
+                var preEditIssueType = issueType.innerText;
+                var preEditContent = issueDescription.innerText;
+                var preEditIssueName = issueName_heading.innerText;
+
+                function editMode(){
+                    editButton.hidden = true;
+                    saveButton.hidden = false;
+                    cancelButton.hidden = false;
+                    issueType.hidden = true;
+                    selectIssueType.hidden = false;
+                    issueDescription.contentEditable = true;
+                    issueName_heading.contentEditable = true;
+                }
+                
+                function saveEdit(){
+                    editButton.hidden = false;
+                    saveButton.hidden = true;
+                    cancelButton.hidden = true;
+                    var newIssueType = selectIssueType.selectedOptions.item(0).innerText;
+                    issueType.innerText = newIssueType;
+                    defaultOptionIssueType.innerText = newIssueType;
+                    issueType.hidden = false;
+                    selectIssueType.hidden = true;
+                    issueDescription.contentEditable = false;
+                    issueName_heading.contentEditable = false;
+                    preEditContent = issueDescription.innerText;
+                    preEditIssueName = issueName_heading.innerText;
+                    issueName_title.innerText = issueName_heading.innerText;
+                }
+        
+                function cancelEdit(){
+                    editButton.hidden = false;
+                    saveButton.hidden = true;
+                    cancelButton.hidden = true;
+                    selectIssueType.hidden = true;
+                    issueType.hidden = false;
+                    defaultOptionIssueType.selected = true;
+                    issueDescription.contentEditable = false;
+                    issueDescription.innerText = preEditContent;
+                    issueName_heading.contentEditable = false;
+                    issueName_heading.innerText = preEditIssueName;
+                }
+            </script>
+    </body>
+    
+</html>

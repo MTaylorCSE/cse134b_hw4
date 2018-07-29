@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Issues List</title>
+        <link rel="stylesheet" href="site.css" type="text/css" media="screen">
+    </head>
+    <body>
+        <h1>Issue List</h1>
+        <noscript>
+            <h2>Warning! If you're seeing this, you have JavaScript disabled. Opening, closing, and deleting issues will not work without JavaScript enabled.</h2>
+        </noscript>
+        <hr>
+        <form action="add.html" method=get>
+            <input type="submit" value="Add issue">
+        </form>
+        <label>Show All Issues<input id="showIssuesCheckbox" type="checkbox" checked onclick="showOnlyOpenIssues()"></label>
+        <table>
+            <thead>
+                <tr>
+                    <th>Issue ID</th>
+                    <th>Issue Name</th>
+                    <th>Issue Type</th>
+                    <th>Issue Description</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="listItem_open" id="listItem1">
+                    <td>1</td>
+                    <td><a href="issue1.html">Terrible Logo</a></td>
+                    <td>Visual</td>
+                    <td>Who even drew this?</td>
+                    <td><button id="resolve1" onclick="closeIssue(1)">Close Issue</button></td>
+                    <td><button onclick="openDeletionConfirmation(1)">Delete</button></td>
+                </tr>
+                <tr class="listItem_open" id="listItem2">
+                    <td>2</td>
+                    <td><a href="issue2.html">Terrible Logo Broken Image</a></td>
+                    <td>Visual</td>
+                    <td>Great, the logo we didn't even want to see isn't appearing on the page.</td>
+                    <td><button id="resolve2" onclick="closeIssue(2)">Close Issue</button></td>
+                    <td><button onclick="openDeletionConfirmation(2)">Delete</button></td>
+                </tr>
+                <tr class="listItem_open" id="listItem3">
+                    <td>3</td>
+                    <td><a href="issue3.html">WebP Image in Firefox</a></td>
+                    <td>Visual</td>
+                    <td>This WebP image of a cat doesn't work in Firefox.</td>
+                    <td><button id="resolve3" onclick="closeIssue(3)">Close Issue</button></td>
+                    <td><button onclick="openDeletionConfirmation(3)">Delete</button></td>
+                </tr>
+                <tr class="listItem_open" id="listItem4">
+                    <td>4</td>
+                    <td><a>Issue 4</a></td>
+                    <td>Undefined</td>
+                    <td>No description available.</td>
+                    <td><button id="resolve4" onclick="closeIssue(4)">Close Issue</button></td>
+                    <td><button onclick="openDeletionConfirmation(4)">Delete</button></td>
+                </tr>
+                <tr class="listItem_open" id="listItem5">
+                    <td>5</td>
+                    <td><a>Issue 5</a></td>
+                    <td>Undefined</td>
+                    <td>No description available.</td>
+                    <td><button id="resolve5" onclick="closeIssue(5)">Close Issue</button></td>
+                    <td><button onclick="openDeletionConfirmation(5)">Delete</button></td>
+                </tr>
+                <tr class="listItem_open" id="listItem6">
+                    <td>6</td>
+                    <td><a>Issue 6</a></td>
+                    <td>Undefined</td>
+                    <td>No description available.</td>
+                    <td><button id="resolve6" onclick="closeIssue(6)">Close Issue</button></td>
+                    <td><button onclick="openDeletionConfirmation(6)">Delete</button></td>
+                </tr>
+                <tr class="listItem_open" id="listItem7">
+                    <td>7</td>
+                    <td><a>Issue 7</a></td>
+                    <td>Undefined</td>
+                    <td>No description available.</td>
+                    <td><button id="resolve7" onclick="closeIssue(7)">Close Issue</button></td>
+                    <td><button onclick="openDeletionConfirmation(7)">Delete</button></td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="6">More issues to be found, as it usuallly goes</td>
+                </tr>
+            </tfoot>
+        </table>
+        <div id="deletionModal" hidden>
+            <p>Are you sure you want to delete this issue?</p>
+            <button onclick="confirmDeletion()">Confirm</button><button onclick="cancelDeletion()">Cancel</button>
+        </div>
+        <script>
+            function closeIssue(item){
+                var itemToClose = document.getElementById("listItem" + item);
+                itemToClose.style = "font-style: italic";
+                itemToClose.className = "listItem_closed";
+                var resolveButton = document.getElementById("resolve"+item);
+                resolveButton.innerText = "Open Issue";
+                resolveButton.onclick = function(){openIssue(item)};
+            }
+            function openIssue(item){
+                var itemToOpen = document.getElementById("listItem" + item);
+                itemToOpen.style = "font-style: normal";
+                itemToOpen.className = "listItem_open";
+                var resolveButton = document.getElementById("resolve"+item);
+                resolveButton.innerText = "Close Issue";
+                resolveButton.onclick = function(){closeIssue(item)};
+            }
+            function showAllIssues(){
+                var showIssuesCheckbox = document.getElementById("showIssuesCheckbox");
+                var closedIssues = document.getElementsByClassName("listItem_closed");
+                var i = 0;
+                for(i; i < closedIssues.length; i++){
+                    closedIssues.item(i).hidden = false;
+                }
+                showIssuesCheckbox.onclick = function(){showOnlyOpenIssues()};
+            }
+            function showOnlyOpenIssues(){
+                var showIssuesCheckbox = document.getElementById("showIssuesCheckbox");
+                var closedIssues = document.getElementsByClassName("listItem_closed");
+                var i = 0;
+                for(i; i < closedIssues.length; i++){
+                    closedIssues.item(i).hidden = true;
+                }
+                showIssuesCheckbox.onclick = function(){showAllIssues()};
+            }
+            var numIssueToDelete;
+            function openDeletionConfirmation(item){
+                var deletionModal = document.getElementById("deletionModal");
+                numIssueToDelete = item;
+                deletionModal.hidden = false;
+            }
+            function cancelDeletion(){
+                var deletionModal = document.getElementById("deletionModal");
+                deletionModal.hidden = true;
+            }
+            function confirmDeletion(){
+                var elIssueToDelete = document.getElementById("listItem" + numIssueToDelete);
+                elIssueToDelete.parentNode.removeChild(elIssueToDelete);
+                deletionModal.hidden = true;
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Sign up</title>
+        <link rel="stylesheet" href="site.css" type="text/css" media="screen">
+    </head>
+    <body>
+        <form id="signupForm" action="index.html" method=GET>
+            <div id="signupInputs">
+                <div><p id="signupBig">Sign Up</p></div>
+                <div><label for="signupEmail">E-mail Address</label></div>
+                <div><input id="signupEmail" type="email"></div>
+                <div><label for="signupPassword">Password</label></div>
+                <div><input type="password" id="signupPassword" minlength="8"></div>
+                <div><input id="signupSubmitButton" type="submit"></div>
+            </div>
+        </form>
+
+    </body>
+</html>
+
+<!-- This is code that I wrote before I read on Slack that the login and signup features don't actually need to work. Commenting here because
+        I will use this in the future
+onclick="
+function signupButtonOnclick() {
+
+    var signupEmailElement = document.getElementById('signupEmail');
+    var signupPasswordElement = document.getElementById('signupPassword');
+    firebase.auth().createUserWithEmailAndPassword(signupEmailElement.value, signupPasswordElement.value).catch(function(error) {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    console.log(errorCode);
+    console.log(errorMessage);
+    });
+}
+signupButtonOnclick();
+">-->
+
+<!-- Firebase authentication JS. Not needed yet
+<script src="https://www.gstatic.com/firebasejs/5.3.0/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyB3MRUV9MYdzBeEDIH5p6HjG9JWIG0FG2Q",
+    authDomain: "cse134b-hw3-functional.firebaseapp.com",
+    databaseURL: "https://cse134b-hw3-functional.firebaseio.com",
+    projectId: "cse134b-hw3-functional",
+    storageBucket: "cse134b-hw3-functional.appspot.com",
+    messagingSenderId: "301554893215"
+  };
+  firebase.initializeApp(config);
+</script>
+-->

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Add an Issue</title>
+        <link href="site.css" rel="stylesheet" type="text/css" media="screen">
+    </head>
+    <body>
+        <h1>Add Issue</h1>
+        <form id="mainform" action="issueslist.html" method=get>
+            <label>
+                Issue Title<br>
+                <input type="text" name="Title">
+            </label>
+            <br>
+            <br>
+            <label>
+                Issue Type<br>
+                <select name="Type">
+                    <optgroup label="Select an option">
+                        <option>Visual</option>
+                        <option>Functionality</option>
+                        <option>Other</option>
+                    </optgroup>
+                </select>
+            </label>
+            <br>
+            <br>
+            <label>
+                Issue Description:<br>
+                <textarea name="Description"></textarea>
+            </label>
+            <br>
+            <input type="submit" value="Submit">
+        </form>
+    </body>
+</html>

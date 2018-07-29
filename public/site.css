@@ -1,0 +1,67 @@
+@font-face{
+  font-family: "Linux Libertine", serif;
+  src: url(fonts/LinLibertine_R.ttf);
+  /* Font can be found at https://www.dafont.com/linux-libertine.font?af=on&psize=s */
+}
+@media screen {
+  body {
+    background-color: #AFEEEE;
+    font-family: "Linux Libertine", serif;
+  }
+}
+
+@media print {
+  body {
+    font-family: "Linux Libertine", serif;
+  }
+}
+table, td {border: 1px solid;}
+
+table{
+  background-color: #FaFaFa;
+}
+
+button{
+  font-family: "Linux Libertine", serif;
+}
+
+select{
+  font-family: "Linux Libertine", serif;
+  font-size: 20px;
+}
+
+pre[contenteditable=false]{
+  font-family: "Linux Libertine", serif;
+  
+}
+span[contenteditable=true]{
+  background-color: #fafafa;
+}
+
+textarea{
+  width:300px;
+  height:450px;
+}
+pre[contenteditable=true]{
+  width: 100vw;
+  background-color: #fafafa;
+  border-width: 1px;
+  border-color: #000000;
+  border-style: solid;
+}
+#signupBig {
+  font-size: 50px;
+}
+input[type=submit]{
+  font-family: "Linux Libertine", serif;
+  font-size: 16px;
+  cursor:pointer;
+}
+
+form label {
+  font-size:30px;
+}
+
+tr.listItem_closed{
+  background-color: #e0e0e0;
+}

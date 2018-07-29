@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title id="issueName_title">Terrible Logo Broken Image</title>
+        <link href="site.css" rel="stylesheet" type="text/css" media="screen">
+    </head>
+    <body>
+        <h1>Issue Name: <span id="issueName_heading">Terrible Logo Broken Image</span></h1>
+        <section>
+            <h2>Issue Type: 
+                <span id="issueType">Visual</span>
+                <select id="selectIssueType" hidden>
+                    <option selected disabled hidden id="defaultOptionIssueType">Visual</option>
+                    <option>Visual</option>
+                    <option>Functionality</option>
+                    <option>Other</option>
+                </select>
+            </h2>
+        </section>
+        <section>
+            <h2>Issue Description:</h2>
+        </section>
+        <pre contenteditable="false" id="issueDescription">
+Now the terrible logo that idiot drew won't even show up
+on the issue page. I bet he wrote the code for this website
+too, judging by the looks of it.</pre>
+        <a href="issue2_1.png"><img src="issue2_1.png" alt="A screenshot of issue 1, Terrible Logo, with the image missing and the alt text showing." height="360" width="640"></a>
+        <a href="issue2_2.png"><img src="issue2_2.png" alt="A screenshot of the code for issue2.html, which shows that someone mistakenly put href as an attribute instead of src." height="360" width="640"></a>
+        <div>
+            <button id="editButton" onclick="editMode()">Edit</button>
+            <button hidden id="saveButton" onclick="saveEdit()">Save</button>
+            <button hidden id="cancelButton" onclick="cancelEdit()">Cancel</button>
+        </div>
+        <script>
+                var issueDescription = document.getElementById('issueDescription');
+                var saveButton = document.getElementById('saveButton');
+                var cancelButton = document.getElementById('cancelButton');
+                var editButton = document.getElementById('editButton');
+                var issueName_title = document.getElementById('issueName_title');
+                var issueName_heading = document.getElementById('issueName_heading');
+                var issueType = document.getElementById('issueType');
+                var selectIssueType = document.getElementById('selectIssueType');
+                var defaultOptionIssueType = document.getElementById('defaultOptionIssueType');
+                var preEditIssueType = issueType.innerText;
+                var preEditContent = issueDescription.innerText;
+                var preEditIssueName = issueName_heading.innerText;
+
+                function editMode(){
+                    editButton.hidden = true;
+                    saveButton.hidden = false;
+                    cancelButton.hidden = false;
+                    issueType.hidden = true;
+                    selectIssueType.hidden = false;
+                    issueDescription.contentEditable = true;
+                    issueName_heading.contentEditable = true;
+                }
+                
+                function saveEdit(){
+                    editButton.hidden = false;
+                    saveButton.hidden = true;
+                    cancelButton.hidden = true;
+                    var newIssueType = selectIssueType.selectedOptions.item(0).innerText;
+                    issueType.innerText = newIssueType;
+                    defaultOptionIssueType.innerText = newIssueType;
+                    issueType.hidden = false;
+                    selectIssueType.hidden = true;
+                    issueDescription.contentEditable = false;
+                    issueName_heading.contentEditable = false;
+                    preEditContent = issueDescription.innerText;
+                    preEditIssueName = issueName_heading.innerText;
+                    issueName_title.innerText = issueName_heading.innerText;
+                }
+        
+                function cancelEdit(){
+                    editButton.hidden = false;
+                    saveButton.hidden = true;
+                    cancelButton.hidden = true;
+                    selectIssueType.hidden = true;
+                    issueType.hidden = false;
+                    defaultOptionIssueType.selected = true;
+                    issueDescription.contentEditable = false;
+                    issueDescription.innerText = preEditContent;
+                    issueName_heading.contentEditable = false;
+                    issueName_heading.innerText = preEditIssueName;
+                }
+            </script>
+    </body>
+    
+</html>

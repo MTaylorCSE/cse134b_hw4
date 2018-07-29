@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="site.css" type="text/css" rel="stylesheet" media="screen">
+    <title>Login</title>
+  </head>
+  <body>
+    <h1 id="welcomeHeading">---Welcome to My Issue Tracker---</h1>
+    <h2 id="descriptionHeading">---It's an issue tracker, evidently---</h2>
+    <img height="300" width="150" src="ant.svg" alt="A vector graphic of an ant (a bug, get it?)">
+    <!-- Image from https://publicdomainvectors.org/en/free-clipart/Silhouette-vector-clip-art-of-ant-insect/22489.html -->
+    <form id="loginForm" action="issueslist.html" method=GET>
+      <div><label for="loginEmail">E-mail Address</label></div>
+      <div><input name="Email" id="loginEmail" type="email"></div>
+      <div><label for="loginPassword">Password</label></div>
+      <div><input name="Password" id="loginPassword" type="password" minlength="8"></div>
+      <div><input type="submit"></div>
+    </form>
+    <p>No account, no problem. Follow the link below:</p>
+    <a href="signup.html">Sign up</a>
+  
+  </body>
+</html>
+
+<!-- This is code that I wrote before I read on Slack that the login and signup features don't actually need to work. Commenting here because
+      I will use this in the future
+onclick="
+var exit = false;
+function loginButtonOnclick(){
+  var loginEmail = document.getElementById('loginEmail');
+  var loginPassword = document.getElementById('loginPassword');
+  firebase.auth().signInWithEmailAndPassword(loginEmail.value, loginPassword.value).catch(function(error) {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    console.log(errorCode);
+    console.log(errorMessage);
+    exit = true;
+  });
+}
+loginButtonOnclick();
+if(exit){
+  //handle failure here or in catch above
+} else {
+  window.open('issueslist.html','_self');
+}
+">-->
+
+<!-- Firebase authentication JS. Not needed yet
+<script src="https://www.gstatic.com/firebasejs/5.3.0/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyB3MRUV9MYdzBeEDIH5p6HjG9JWIG0FG2Q",
+    authDomain: "cse134b-hw3-functional.firebaseapp.com",
+    databaseURL: "https://cse134b-hw3-functional.firebaseio.com",
+    projectId: "cse134b-hw3-functional",
+    storageBucket: "cse134b-hw3-functional.appspot.com",
+    messagingSenderId: "301554893215"
+  };
+  firebase.initializeApp(config);
+</script>
+-->
