@@ -21,6 +21,7 @@ var issue_contents_3 = {
   issue_image_src:"nocat.jpeg",
   issue_image_alt:"A screenshot of this webpage in Firefox, where the alt text is showing for the cat image."
 }
+var issue_contents;
 
 var issues = [issue_contents_1,issue_contents_2,issue_contents_3];
 var current_issue_index;
@@ -44,7 +45,7 @@ function loadIssueContents(issueContents) {
 }
 
 function getIssueContentFromDB(issue_number){
-  current_issue_index = issue_number - 1;
+  current_issue_index = issue_number;
   var xhr = new XMLHttpRequest();
   xhr.open("GET","http://localhost:3000/issueContents/" + issue_number,true);
   
@@ -102,11 +103,18 @@ function saveEdit(){
 
 // Saves edited content to the DB, which is really just an object in memory on this page right now
 function saveEditDB(){
-  var issue = issues[current_issue_index];
-  issue.issue_type = issueType.innerText;
-  issue.issue_name = issueName_heading.innerText;
-  issue.issue_description = issueDescription.innerText;
-  console.log(issues);
+  issue_contents.issue_type = issueType.innerText;
+  issue_contents.issue_name = issueName_heading.innerText;
+  issue_contents.issue_description = issueDescription.innerText;
+  var xhr = new XMLHttpRequest();
+  xhr.open("PUT","http://localhost:3000/issueContents/" + current_issue_index,true);
+  xhr.setRequestHeader("Content-Type","application/json");
+  xhr.onreadystatechange = function(){
+    if(xhr.readyState == 4 && xhr.status == 200){
+      
+    }
+  }
+  xhr.send(JSON.stringify(issue_contents));
 }
 
 function cancelEdit(){
