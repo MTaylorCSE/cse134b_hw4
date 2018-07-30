@@ -201,7 +201,7 @@ function checkID(issue){
 }
 
 // Removes list item from wherever it is stored.
-// As of right now, it's really just fromm the array in this script
+// As of right now, it's really just from the array in this script
 function deleteFromDB(){
   var index = issueList.findIndex(checkID);
   issueList.splice(index,1);

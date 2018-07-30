@@ -23,10 +23,11 @@ var issue_contents_3 = {
 }
 
 var issues = [issue_contents_1,issue_contents_2,issue_contents_3];
-
+var current_issue_index;
 function loadIssueContents(issue_number) {
 
   issue_contents = issues[issue_number - 1];
+  current_issue_index = issue_number - 1;
   var issueDescription = document.getElementById('issueDescription');
   var issueName_title = document.getElementById('issueName_title');
   var issueName_heading = document.getElementById('issueName_heading');
@@ -71,6 +72,7 @@ function editMode(){
 }
 
 function saveEdit(){
+  // Visual display stuff
   editButton.hidden = false;
   saveButton.hidden = true;
   cancelButton.hidden = true;
@@ -84,6 +86,16 @@ function saveEdit(){
   preEditContent = issueDescription.innerText;
   preEditIssueName = issueName_heading.innerText;
   issueName_title.innerText = issueName_heading.innerText;
+  saveEditDB();
+}
+
+// Saves edited content to the DB, which is really just an object in memory on this page right now
+function saveEditDB(){
+  var issue = issues[current_issue_index];
+  issue.issue_type = issueType.innerText;
+  issue.issue_name = issueName_heading.innerText;
+  issue.issue_description = issueDescription.innerText;
+  console.log(issues);
 }
 
 function cancelEdit(){
