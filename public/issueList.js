@@ -25,6 +25,7 @@ var issueList = [
   }
 
 ];
+console.log(JSON.stringify(issueList));
 window.addEventListener("load",loadIssues);
 
 function loadIssues(){

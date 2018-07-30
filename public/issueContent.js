@@ -24,10 +24,9 @@ var issue_contents_3 = {
 
 var issues = [issue_contents_1,issue_contents_2,issue_contents_3];
 var current_issue_index;
-function loadIssueContents(issue_number) {
-
-  issue_contents = issues[issue_number - 1];
-  current_issue_index = issue_number - 1;
+function loadIssueContents(issueContents) {
+  issue_contents = JSON.parse(issueContents);
+  console.log(issue_contents);
   var issueDescription = document.getElementById('issueDescription');
   var issueName_title = document.getElementById('issueName_title');
   var issueName_heading = document.getElementById('issueName_heading');
@@ -44,6 +43,18 @@ function loadIssueContents(issue_number) {
   issueImage.alt = issue_contents.issue_image_alt;
 }
 
+function getIssueContentFromDB(issue_number){
+  current_issue_index = issue_number - 1;
+  var xhr = new XMLHttpRequest();
+  xhr.open("GET","http://localhost:3000/issueContents/" + issue_number,true);
+  
+  xhr.onreadystatechange = function(){
+    if(xhr.readyState == 4 && xhr.status == 200){
+      loadIssueContents(xhr.responseText);
+    }
+  }
+  xhr.send(null);
+}
 
 var issueDescription = document.getElementById('issueDescription');
 var saveButton = document.getElementById('saveButton');
