@@ -37,7 +37,8 @@
 
         <script src="scripts.js"></script>
         <script>
-            loadContents(3);
+            var urlParams = new URLSearchParams(window.location.search);
+            loadContents(parseInt(urlParams.get('issue')));
         </script>
 
         <script>
