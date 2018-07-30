@@ -7,22 +7,17 @@
         <link href="site.css" rel="stylesheet" type="text/css" media="screen">
     </head>
     <body>
-        <script src="issueContent.js"></script>
-        <script>
-            changeGlobalThing();
-        </script>
-
         <h1>Add Issue</h1>
         <form id="mainform" action="issueslist.html" method=get>
             <label>
                 Issue Title<br>
-                <input type="text" name="Title">
+                <input type="text" name="Title" required>
             </label>
             <br>
             <br>
             <label>
                 Issue Type<br>
-                <select name="Type">
+                <select name="Type" required>
                     <optgroup label="Select an option">
                         <option>Visual</option>
                         <option>Functionality</option>
@@ -34,7 +29,7 @@
             <br>
             <label>
                 Issue Description:<br>
-                <textarea name="Description"></textarea>
+                <textarea name="Description" required></textarea>
             </label>
             <br>
             <input type="submit" value="Submit">

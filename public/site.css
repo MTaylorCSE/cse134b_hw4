@@ -40,7 +40,7 @@ span[contenteditable=true]{
 
 textarea{
   width:300px;
-  height:450px;
+  height:100px;
 }
 pre[contenteditable=true]{
   width: 100vw;

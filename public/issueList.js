@@ -80,6 +80,68 @@ function loadIssues(){
 
     issueListBody.appendChild(newRow);
   }
+
+  var urlParams = new URLSearchParams(window.location.search);
+  console.log(urlParams.toString());
+  if(urlParams.has("Title")){
+    issueList[issueList.length] = {
+      status:"open",
+      issueID: issueList[issueList.length-1].issueID + 1,
+      issueName: urlParams.get("Title"),
+      issueType: urlParams.get("Type"),
+      issueDescription: urlParams.get("Description")
+    }
+    issueID = issueList[issueList.length-1].issueID;
+    console.log(urlParams.get("Description"));
+    console.log(decodeURIComponent(urlParams.get("Description")));
+    var newRow = document.createElement("tr");
+    newRow.setAttribute("class","listItem_" + issueList[i].status);
+    newRow.setAttribute("id","listItem"+issueID);
+
+    var idCell = document.createElement("td");
+    idCell.appendChild(document.createTextNode(issueID));
+    newRow.appendChild(idCell);
+
+    var issueLink = document.createElement("a");
+    issueLink.setAttribute("href","issue.html?issue="+issueID);
+    issueLink.appendChild(document.createTextNode(issueList[i].issueName));
+    
+    var issueLinkCell = document.createElement("td");
+    issueLinkCell.appendChild(issueLink);
+    newRow.appendChild(issueLinkCell);
+
+    var issueTypeCell = document.createElement("td");
+    issueTypeCell.appendChild(document.createTextNode(issueList[i].issueType));
+    newRow.appendChild(issueTypeCell);
+
+    var issueDescriptionCell = document.createElement("td");
+    issueDescriptionCell.appendChild(document.createTextNode(issueList[i].issueDescription));
+    newRow.appendChild(issueDescriptionCell);
+    
+    var closeOrOpenButton = document.createElement("button");
+    closeOrOpenButton.setAttribute("id","resolve"+issueID);
+    if(issueList[i].status == "open"){
+      closeOrOpenButton.setAttribute("onclick","closeIssue("+issueID+")");
+      closeOrOpenButton.appendChild(document.createTextNode("Close Issue"));
+    } else {
+      closeOrOpenButton.setAttribute("onclick","openIssue("+issueID+")");
+      closeOrOpenButton.appendChild(document.createTextNode("Open Issue"));
+    }
+    
+    closeOrOpenButtonCell = document.createElement("td");
+    closeOrOpenButtonCell.appendChild(closeOrOpenButton);
+    newRow.appendChild(closeOrOpenButtonCell);
+
+    var deleteButton = document.createElement("button");
+    deleteButton.setAttribute("onclick","openDeletionConfirmation("+issueID+")");
+    deleteButton.appendChild(document.createTextNode("Delete"));
+
+    var deleteButtonCell = document.createElement("td");
+    deleteButtonCell.appendChild(deleteButton);
+    newRow.appendChild(deleteButtonCell);
+
+    issueListBody.appendChild(newRow);
+  }
 }
 
 function closeIssue(item){
@@ -129,7 +191,19 @@ function cancelDeletion(){
 function confirmDeletion(){
   var elIssueToDelete = document.getElementById("listItem" + numIssueToDelete);
   elIssueToDelete.parentNode.removeChild(elIssueToDelete);
+  deleteFromDB();
   deletionModal.hidden = true;
 }
 
+// Helper function to search through issue array
+function checkID(issue){
+  return issue.issueID == numIssueToDelete;
+}
 
+// Removes list item from wherever it is stored.
+// As of right now, it's really just fromm the array in this script
+function deleteFromDB(){
+  var index = issueList.findIndex(checkID);
+  issueList.splice(index,1);
+  console.log(issueList);
+}

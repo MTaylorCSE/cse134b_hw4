@@ -2,21 +2,24 @@ var issue_contents_1 = {
   issue_name:"Terrible Logo",
   issue_type:"Visual",
   issue_description:"This logo looks like someone attacked a box of crayons\nwith a curling iron. Whoever drew this needs a stern\ntalking to.",
-  issue_image_src:"logo.gif"
+  issue_image_src:"logo.gif",
+  issue_image_alt:"A terribly drawn version of the Google Chrome logo"
 }
 
 var issue_contents_2 = {
   issue_name:"Terrible Logo Broken Image",
   issue_type:"Visual",
   issue_description:"Now the terrible logo that idiot drew won't even show up\non the issue page. I bet he wrote the code for this website\ntoo, judging by the looks of it.",
-  issue_image_src:"issue2_1.png"
+  issue_image_src:"issue2_1.png",
+  issue_image_alt:"A screenshot of issue 1, Terrible Logo, with the image missing and the alt text showing."
 }
 
 var issue_contents_3 = {
   issue_name:"WebP Image in Firefox",
   issue_type:"Visual",
   issue_description:"Look at this picture of a cat. It's beautiful. It\nisn't as beautiful in Firefox. There, it's just my\nalt text.",
-  issue_image_src:"nocat.jpeg"
+  issue_image_src:"nocat.jpeg",
+  issue_image_alt:"A screenshot of this webpage in Firefox, where the alt text is showing for the cat image."
 }
 
 var issues = [issue_contents_1,issue_contents_2,issue_contents_3];
@@ -37,6 +40,7 @@ function loadIssueContents(issue_number) {
   issueDescription.innerText = issue_contents.issue_description;
   defaultOptionIssueType.innerText = issue_contents.issue_type;
   issueImage.src = issue_contents.issue_image_src;
+  issueImage.alt = issue_contents.issue_image_alt;
 }
 
 
