@@ -26,24 +26,8 @@
     },
     {
       "id": 4,
-      "issue_name": "Test",
+      "issue_name": "Another issue",
       "issue_type": "Functionality",
-      "issue_description": "Is it changed?",
-      "issue_image_src": "stockimage.jpeg",
-      "issue_image_alt": "A placeholder image."
-    },
-    {
-      "id": 5,
-      "issue_name": "Test2",
-      "issue_type": "Visual",
-      "issue_description": "Click the edit button below to change this default text.",
-      "issue_image_src": "stockimage.jpeg",
-      "issue_image_alt": "A placeholder image."
-    },
-    {
-      "id": 6,
-      "issue_name": "adsf",
-      "issue_type": "Other",
       "issue_description": "Click the edit button below to change this default text.",
       "issue_image_src": "stockimage.jpeg",
       "issue_image_alt": "A placeholder image."
@@ -78,25 +62,9 @@
       "id": 4,
       "status": "open",
       "issueID": 4,
-      "issueName": "Test",
-      "issueType": "Visual",
-      "issueDescription": "test"
-    },
-    {
-      "id": 5,
-      "status": "open",
-      "issueID": 5,
-      "issueName": "Test2",
-      "issueType": "Visual",
-      "issueDescription": "Test2"
-    },
-    {
-      "id": 6,
-      "status": "open",
-      "issueID": 6,
-      "issueName": "adsf",
-      "issueType": "Other",
-      "issueDescription": "hjhljkhhjk"
+      "issueName": "Another issue",
+      "issueType": "Functionality",
+      "issueDescription": "Another issue indeed\n"
     }
   ]
 }

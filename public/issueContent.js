@@ -108,15 +108,37 @@ function saveEditDB(){
   issue_contents.issue_type = issueType.innerText;
   issue_contents.issue_name = issueName_heading.innerText;
   issue_contents.issue_description = issueDescription.innerText;
-  var xhr = new XMLHttpRequest();
-  xhr.open("PUT","http://localhost:3000/issueContents/" + current_issue_index,true);
-  xhr.setRequestHeader("Content-Type","application/json");
-  xhr.onreadystatechange = function(){
-    if(xhr.readyState == 4 && xhr.status == 200){
+
+  // Updating issue list item
+  var xhr_issue_list_item = new XMLHttpRequest();
+  xhr_issue_list_item.open("PATCH","http://localhost:3000/issueList/" + current_issue_index,true);
+  xhr_issue_list_item.setRequestHeader("Content-Type","application/json");
+  xhr_issue_list_item.onreadystatechange = function(){
+    if(xhr_issue_list_item.status == 200 && xhr_issue_list_item.readyState == 4){
+      console.log("Ready for inspection, sire.");
+    }
+  }
+
+  // Seeing if multiple deltas can be made on a patch request
+  var list_item_updates = {
+    issueType:issue_contents.issue_type,
+    issueName:issue_contents.issue_name
+  };
+  xhr_issue_list_item.send(JSON.stringify(list_item_updates));
+
+  // Updating issue contents
+  var xhr_issue_contents = new XMLHttpRequest();
+  xhr_issue_contents.open("PUT","http://localhost:3000/issueContents/" + current_issue_index,true);
+  xhr_issue_contents.setRequestHeader("Content-Type","application/json");
+  xhr_issue_contents.onreadystatechange = function(){
+    if(xhr_issue_contents.readyState == 4 && xhr_issue_contents.status == 200){
       
     }
   }
-  xhr.send(JSON.stringify(issue_contents));
+  xhr_issue_contents.send(JSON.stringify(issue_contents));
+
+  
+  
 }
 
 function cancelEdit(){

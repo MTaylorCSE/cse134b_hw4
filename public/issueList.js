@@ -91,6 +91,10 @@ function closeIssue(item){
   var resolveButton = document.getElementById("resolve"+item);
   resolveButton.innerText = "Open Issue";
   resolveButton.onclick = function(){openIssue(item)};
+  var xhr_set_closed = new XMLHttpRequest();
+  xhr_set_closed.open("PATCH","http://localhost:3000/issueList/"+item,true);
+  xhr_set_closed.setRequestHeader("Content-Type","application/json");
+  xhr_set_closed.send(JSON.stringify({status:"closed"}));
 }
 function openIssue(item){
   var itemToOpen = document.getElementById("listItem" + item);
@@ -99,6 +103,10 @@ function openIssue(item){
   var resolveButton = document.getElementById("resolve"+item);
   resolveButton.innerText = "Close Issue";
   resolveButton.onclick = function(){closeIssue(item)};
+  var xhr_set_open = new XMLHttpRequest();
+  xhr_set_open.open("PATCH","http://localhost:3000/issueList/"+item,true);
+  xhr_set_open.setRequestHeader("Content-Type","application/json");
+  xhr_set_open.send(JSON.stringify({status:"open"}));
 }
 function showAllIssues(){
   var showIssuesCheckbox = document.getElementById("showIssuesCheckbox");
@@ -141,7 +149,14 @@ function checkID(issue){
 }
 
 function deleteFromDB(){
-  
+  var xhr_delete_issue_list_item = new XMLHttpRequest();
+  xhr_delete_issue_list_item.open("DELETE","http://localhost:3000/issueList/"+numIssueToDelete,true);
+  xhr_delete_issue_list_item.send();
+
+  var xhr_delete_issue_contents = new XMLHttpRequest();
+  xhr_delete_issue_contents.open("DELETE","http://localhost:3000/issueContents/"+numIssueToDelete,true);
+  xhr_delete_issue_contents.send();
+
 }
 
 function loadFromDB(){
