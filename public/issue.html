@@ -35,65 +35,11 @@
         <button hidden id="cancelButton" onclick="cancelEdit()">Cancel</button>
         </div>
 
-        <script src="scripts.js"></script>
+        <script src="issueContent.js"></script>
         <script>
             var urlParams = new URLSearchParams(window.location.search);
-            loadContents(parseInt(urlParams.get('issue'))); 
+            loadIssueContents(parseInt(urlParams.get('issue'))); 
         </script>
-
-        <script>
-                var issueDescription = document.getElementById('issueDescription');
-                var saveButton = document.getElementById('saveButton');
-                var cancelButton = document.getElementById('cancelButton');
-                var editButton = document.getElementById('editButton');
-                var issueName_title = document.getElementById('issueName_title');
-                var issueName_heading = document.getElementById('issueName_heading');
-                var issueType = document.getElementById('issueType');
-                var selectIssueType = document.getElementById('selectIssueType');
-                var defaultOptionIssueType = document.getElementById('defaultOptionIssueType');
-                var preEditIssueType = issueType.innerText;
-                var preEditContent = issueDescription.innerText;
-                var preEditIssueName = issueName_heading.innerText;
-
-                function editMode(){
-                    editButton.hidden = true;
-                    saveButton.hidden = false;
-                    cancelButton.hidden = false;
-                    issueType.hidden = true;
-                    selectIssueType.hidden = false;
-                    issueDescription.contentEditable = true;
-                    issueName_heading.contentEditable = true;
-                }
-                
-                function saveEdit(){
-                    editButton.hidden = false;
-                    saveButton.hidden = true;
-                    cancelButton.hidden = true;
-                    var newIssueType = selectIssueType.selectedOptions.item(0).innerText;
-                    issueType.innerText = newIssueType;
-                    defaultOptionIssueType.innerText = newIssueType;
-                    issueType.hidden = false;
-                    selectIssueType.hidden = true;
-                    issueDescription.contentEditable = false;
-                    issueName_heading.contentEditable = false;
-                    preEditContent = issueDescription.innerText;
-                    preEditIssueName = issueName_heading.innerText;
-                    issueName_title.innerText = issueName_heading.innerText;
-                }
-        
-                function cancelEdit(){
-                    editButton.hidden = false;
-                    saveButton.hidden = true;
-                    cancelButton.hidden = true;
-                    selectIssueType.hidden = true;
-                    issueType.hidden = false;
-                    defaultOptionIssueType.selected = true;
-                    issueDescription.contentEditable = false;
-                    issueDescription.innerText = preEditContent;
-                    issueName_heading.contentEditable = false;
-                    issueName_heading.innerText = preEditIssueName;
-                }
-            </script>
     </body>
     
 </html>
