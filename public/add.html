@@ -11,13 +11,13 @@
         <form id="mainform" action="issueslist.html" method=get>
             <label>
                 Issue Title<br>
-                <input type="text" name="Title" required>
+                <input id="addTitle" type="text" required>
             </label>
             <br>
             <br>
             <label>
                 Issue Type<br>
-                <select name="Type" required>
+                <select id="addType" required>
                     <optgroup label="Select an option">
                         <option>Visual</option>
                         <option>Functionality</option>
@@ -29,10 +29,11 @@
             <br>
             <label>
                 Issue Description:<br>
-                <textarea name="Description" required></textarea>
+                <textarea id="addDescription" required></textarea>
             </label>
             <br>
-            <input type="submit" value="Submit">
+            <input id="addSubmit" onclick="addNewIssueToDB()" type="submit" value="Submit">
         </form>
+        <script src="add.js"></script>
     </body>
 </html>

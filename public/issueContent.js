@@ -34,14 +34,16 @@ function loadIssueContents(issueContents) {
   var issueType = document.getElementById('issueType');
   var defaultOptionIssueType = document.getElementById('defaultOptionIssueType');
   var issueImage = document.getElementById('issueImage');
+  var issueImageLink = document.getElementById('imageLink');
 
+  issueImageLink.setAttribute("href",issue_contents.issue_image_src);
   issueType.innerText = issue_contents.issue_type;
   issueName_title.innerText = issue_contents.issue_name;
   issueName_heading.innerText = issue_contents.issue_name;
   issueDescription.innerText = issue_contents.issue_description;
   defaultOptionIssueType.innerText = issue_contents.issue_type;
   issueImage.src = issue_contents.issue_image_src;
-  issueImage.alt = issue_contents.issue_image_alt;
+  issueImage.alt = issue_contents.issue_image_alt
 }
 
 function getIssueContentFromDB(issue_number){

@@ -1,7 +1,7 @@
 {
   "issueContents": [
     {
-      "id": "1",
+      "id": 1,
       "issue_name": "Terrible Logo",
       "issue_type": "Visual",
       "issue_description": "This logo looks like someone attacked a box of crayons\nwith a curling iron. Whoever drew this needs a stern\ntalking to.",
@@ -23,6 +23,30 @@
       "issue_description": "Look at this picture of a cat. It's beautiful. It\nisn't as beautiful in Firefox. There, it's just my\nalt text.",
       "issue_image_src": "nocat.jpeg",
       "issue_image_alt": "A screenshot of this webpage in Firefox, where the alt text is showing for the cat image."
+    },
+    {
+      "id": 4,
+      "issue_name": "Test",
+      "issue_type": "Functionality",
+      "issue_description": "Is it changed?",
+      "issue_image_src": "stockimage.jpeg",
+      "issue_image_alt": "A placeholder image."
+    },
+    {
+      "id": 5,
+      "issue_name": "Test2",
+      "issue_type": "Visual",
+      "issue_description": "Click the edit button below to change this default text.",
+      "issue_image_src": "stockimage.jpeg",
+      "issue_image_alt": "A placeholder image."
+    },
+    {
+      "id": 6,
+      "issue_name": "adsf",
+      "issue_type": "Other",
+      "issue_description": "Click the edit button below to change this default text.",
+      "issue_image_src": "stockimage.jpeg",
+      "issue_image_alt": "A placeholder image."
     }
   ],
   "issueList": [
@@ -49,6 +73,30 @@
       "issueName": "WebP Image in Firefox",
       "issueType": "Visual",
       "issueDescription": "This WebP image of a cat doesn't work in Firefox."
+    },
+    {
+      "id": 4,
+      "status": "open",
+      "issueID": 4,
+      "issueName": "Test",
+      "issueType": "Visual",
+      "issueDescription": "test"
+    },
+    {
+      "id": 5,
+      "status": "open",
+      "issueID": 5,
+      "issueName": "Test2",
+      "issueType": "Visual",
+      "issueDescription": "Test2"
+    },
+    {
+      "id": 6,
+      "status": "open",
+      "issueID": 6,
+      "issueName": "adsf",
+      "issueType": "Other",
+      "issueDescription": "hjhljkhhjk"
     }
   ]
 }
