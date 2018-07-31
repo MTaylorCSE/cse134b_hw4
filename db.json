@@ -19,7 +19,7 @@
     {
       "id": 3,
       "issue_name": "WebP Image in Firefox",
-      "issue_type": "Visual",
+      "issue_type": "Functionality",
       "issue_description": "Look at this picture of a cat. It's beautiful. It\nisn't as beautiful in Firefox. There, it's just my\nalt text.",
       "issue_image_src": "nocat.jpeg",
       "issue_image_alt": "A screenshot of this webpage in Firefox, where the alt text is showing for the cat image."
@@ -27,7 +27,7 @@
     {
       "id": 4,
       "issue_name": "Another issue",
-      "issue_type": "Functionality",
+      "issue_type": "Visual",
       "issue_description": "Click the edit button below to change this default text.",
       "issue_image_src": "stockimage.jpeg",
       "issue_image_alt": "A placeholder image."
@@ -55,7 +55,7 @@
       "status": "open",
       "issueID": 3,
       "issueName": "WebP Image in Firefox",
-      "issueType": "Visual",
+      "issueType": "Functionality",
       "issueDescription": "This WebP image of a cat doesn't work in Firefox."
     },
     {
@@ -63,7 +63,7 @@
       "status": "open",
       "issueID": 4,
       "issueName": "Another issue",
-      "issueType": "Functionality",
+      "issueType": "Visual",
       "issueDescription": "Another issue indeed\n"
     }
   ]
