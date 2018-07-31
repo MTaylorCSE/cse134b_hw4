@@ -27,15 +27,7 @@
     {
       "id": 4,
       "issue_name": "Another issue",
-      "issue_type": "Functionality",
-      "issue_description": "Click the edit button below to change this default text.",
-      "issue_image_src": "stockimage.jpeg",
-      "issue_image_alt": "A placeholder image."
-    },
-    {
-      "id": 5,
-      "issue_name": "Test issue",
-      "issue_type": "Functionality",
+      "issue_type": "Visual",
       "issue_description": "Click the edit button below to change this default text.",
       "issue_image_src": "stockimage.jpeg",
       "issue_image_alt": "A placeholder image."
@@ -71,16 +63,8 @@
       "status": "open",
       "issueID": 4,
       "issueName": "Another issue",
-      "issueType": "Functionality",
+      "issueType": "Visual",
       "issueDescription": "Another issue indeed\n"
-    },
-    {
-      "id": 5,
-      "status": "open",
-      "issueID": 5,
-      "issueName": "Test issue",
-      "issueType": "Functionality",
-      "issueDescription": "It's an issue"
     }
   ]
 }

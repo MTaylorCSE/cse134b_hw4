@@ -1,32 +1,4 @@
-// var issueList = [
-//   {
-//     status:"open",
-//     issueID:1,
-//     issueName:"Terrible Logo",
-//     issueType:"Visual",
-//     issueDescription:"Who even drew this?",
-
-//   },
-//   {
-//     status:"open",
-//     issueID:2,
-//     issueName:"Terrible Logo Broken Image",
-//     issueType:"Visual",
-//     issueDescription:"Great, the logo we didn't even want to see isn't appearing on the page.",
-
-//   },
-//   {
-//     status:"open",
-//     issueID:3,
-//     issueName:"WebP Image in Firefox",
-//     issueType:"Visual",
-//     issueDescription:"This WebP image of a cat doesn't work in Firefox.",
-
-//   }
-
-// ];
-
-window.addEventListener("load",loadFromDB);
+// window.addEventListener("load",loadFromLocalDB);
 
 function loadIssues(issueList){
   var issueListBody = document.getElementById("issueListBody");
@@ -159,7 +131,7 @@ function deleteFromDB(){
 
 }
 
-function loadFromDB(){
+function loadFromLocalDB(){
   var xhr = new XMLHttpRequest();
   xhr.open("GET","http://localhost:3000/issueList",true);
   xhr.onreadystatechange = function(){
@@ -168,4 +140,12 @@ function loadFromDB(){
     }
   }
   xhr.send();
+}
+
+function loadFromFirebaseDB(uid){
+  firebase.database().ref("/users/"+uid+"/issueList")
+    .once("value")
+      .then(function(snapshot){
+        loadIssues(snapshot.val());
+      });
 }
