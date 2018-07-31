@@ -11,7 +11,7 @@
     {
       "id": 2,
       "issue_name": "Terrible Logo Broken Image",
-      "issue_type": "Visual",
+      "issue_type": "Other",
       "issue_description": "Now the terrible logo that idiot drew won't even show up\non the issue page. I bet he wrote the code for this website\ntoo, judging by the looks of it.\n",
       "issue_image_src": "issue2_1.png",
       "issue_image_alt": "A screenshot of issue 1, Terrible Logo, with the image missing and the alt text showing."
@@ -27,7 +27,15 @@
     {
       "id": 4,
       "issue_name": "Another issue",
-      "issue_type": "Visual",
+      "issue_type": "Functionality",
+      "issue_description": "Click the edit button below to change this default text.",
+      "issue_image_src": "stockimage.jpeg",
+      "issue_image_alt": "A placeholder image."
+    },
+    {
+      "id": 5,
+      "issue_name": "Test issue",
+      "issue_type": "Functionality",
       "issue_description": "Click the edit button below to change this default text.",
       "issue_image_src": "stockimage.jpeg",
       "issue_image_alt": "A placeholder image."
@@ -44,10 +52,10 @@
     },
     {
       "id": 2,
-      "status": "closed",
+      "status": "open",
       "issueID": 2,
       "issueName": "Terrible Logo Broken Image",
-      "issueType": "Visual",
+      "issueType": "Other",
       "issueDescription": "Great, the logo we didn't even want to see isn't appearing on the page."
     },
     {
@@ -60,11 +68,19 @@
     },
     {
       "id": 4,
-      "status": "closed",
+      "status": "open",
       "issueID": 4,
       "issueName": "Another issue",
-      "issueType": "Visual",
+      "issueType": "Functionality",
       "issueDescription": "Another issue indeed\n"
+    },
+    {
+      "id": 5,
+      "status": "open",
+      "issueID": 5,
+      "issueName": "Test issue",
+      "issueType": "Functionality",
+      "issueDescription": "It's an issue"
     }
   ]
 }

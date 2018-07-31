@@ -21,7 +21,7 @@
         firebase.initializeApp(config);
         firebase.auth().onAuthStateChanged(function(user) {
           if (user) {
-            console.log(user.email);
+            window.location.replace("issueslist.html");
           } else {
             // Something for sign out, not necessary here?
           }
@@ -30,14 +30,6 @@
         <script src="scripts/signup.js"></script>
     </head>
     <body>
-        <button onclick="(function() {
-            firebase.auth().signOut().then(function() {
-                // Sign-out successful.
-            }).catch(function(error) {
-                console.log(error);
-                console.log('Sign out error');
-            });
-        })()">Sign out</button>
         <form id="signupForm" action="index.html" method=GET>
             <div id="signupInputs">
                 <div><p id="signupBig">Sign Up</p></div>
