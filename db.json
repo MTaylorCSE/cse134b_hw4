@@ -44,7 +44,7 @@
     },
     {
       "id": 2,
-      "status": "open",
+      "status": "closed",
       "issueID": 2,
       "issueName": "Terrible Logo Broken Image",
       "issueType": "Visual",
@@ -60,7 +60,7 @@
     },
     {
       "id": 4,
-      "status": "open",
+      "status": "closed",
       "issueID": 4,
       "issueName": "Another issue",
       "issueType": "Visual",

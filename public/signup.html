@@ -5,52 +5,51 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Sign up</title>
         <link rel="stylesheet" href="site.css" type="text/css" media="screen">
+        <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-auth.js"></script>
+        <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyDMcldNQv43OCqtkWK1ruYgvrPWWhd0ASM",
+            authDomain: "cse134b-hw4-41ab1.firebaseapp.com",
+            databaseURL: "https://cse134b-hw4-41ab1.firebaseio.com",
+            projectId: "cse134b-hw4-41ab1",
+            storageBucket: "cse134b-hw4-41ab1.appspot.com",
+            messagingSenderId: "1059552826976"
+        };
+        firebase.initializeApp(config);
+        firebase.auth().onAuthStateChanged(function(user) {
+          if (user) {
+            console.log(user.email);
+          } else {
+            // Something for sign out, not necessary here?
+          }
+        });
+        </script>
+        <script src="scripts/signup.js"></script>
     </head>
     <body>
+        <button onclick="(function() {
+            firebase.auth().signOut().then(function() {
+                // Sign-out successful.
+            }).catch(function(error) {
+                console.log(error);
+                console.log('Sign out error');
+            });
+        })()">Sign out</button>
         <form id="signupForm" action="index.html" method=GET>
             <div id="signupInputs">
                 <div><p id="signupBig">Sign Up</p></div>
                 <div><label for="signupEmail">E-mail Address</label></div>
-                <div><input id="signupEmail" type="email"></div>
+                <div><input required id="signupEmail" type="email"></div>
                 <div><label for="signupPassword">Password</label></div>
-                <div><input type="password" id="signupPassword" minlength="8"></div>
-                <div><input id="signupSubmitButton" type="submit"></div>
+                <div><input required type="password" id="signupPassword" minlength="8"></div>
+                
             </div>
         </form>
-
+        <div><button onclick="firebaseSignup()">Submit</button></div>
+        
+        
     </body>
 </html>
-
-<!-- This is code that I wrote before I read on Slack that the login and signup features don't actually need to work. Commenting here because
-        I will use this in the future
-onclick="
-function signupButtonOnclick() {
-
-    var signupEmailElement = document.getElementById('signupEmail');
-    var signupPasswordElement = document.getElementById('signupPassword');
-    firebase.auth().createUserWithEmailAndPassword(signupEmailElement.value, signupPasswordElement.value).catch(function(error) {
-    // Handle Errors here.
-    var errorCode = error.code;
-    var errorMessage = error.message;
-    console.log(errorCode);
-    console.log(errorMessage);
-    });
-}
-signupButtonOnclick();
-">-->
-
-<!-- Firebase authentication JS. Not needed yet
-<script src="https://www.gstatic.com/firebasejs/5.3.0/firebase.js"></script>
-<script>
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyB3MRUV9MYdzBeEDIH5p6HjG9JWIG0FG2Q",
-    authDomain: "cse134b-hw3-functional.firebaseapp.com",
-    databaseURL: "https://cse134b-hw3-functional.firebaseio.com",
-    projectId: "cse134b-hw3-functional",
-    storageBucket: "cse134b-hw3-functional.appspot.com",
-    messagingSenderId: "301554893215"
-  };
-  firebase.initializeApp(config);
-</script>
--->
