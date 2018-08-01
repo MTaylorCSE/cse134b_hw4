@@ -21,6 +21,7 @@
         firebase.initializeApp(config);
         firebase.auth().onAuthStateChanged(function(user) {
           if (user) {
+            
             window.location.replace("issueslist.html");
           } else {
             // Something for sign out, not necessary here?

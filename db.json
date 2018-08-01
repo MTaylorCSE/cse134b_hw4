@@ -3,7 +3,7 @@
     null,
     {
       "id": 1,
-      "issue_description": "This logo looks like someone attacked a box of crayons\nwith a curling iron. Whoever drew this needs a stern\ntalking to. Test edit.",
+      "issue_description": "This logo looks like someone attacked a box of crayons\nwith a curling iron. Whoever drew this needs a stern\ntalking to. This is the local db.json.",
       "issue_image_alt": "A terribly drawn version of the Google Chrome logo",
       "issue_image_src": "logo.gif",
       "issue_name": "Terrible Logo",
@@ -36,7 +36,7 @@
       "issueDescription": "Who even drew this?",
       "issueID": 1,
       "issueName": "Terrible Logo",
-      "issueType": "Visual",
+      "issueType": "Functionality",
       "status": "open"
     },
     {

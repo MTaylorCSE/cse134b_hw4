@@ -21,6 +21,7 @@ window.addEventListener("load",function(){
   preEditIssueType;
   preEditContent;
   preEditIssueName;
+  
 });
 
 /**
@@ -83,8 +84,8 @@ function saveEditVisual(){
   
 }
 
-function saveEdit(local){
-  if(local){
+function saveEditREST(rest){
+  if(rest){
     saveEditVisual();
     saveEditRestDB();
   }else{
@@ -175,4 +176,24 @@ function getIssueContentFromFirebaseDB(issue_number,uid){
   ref.once("value").then(function(snapshot){
     loadIssueContents(snapshot.val());
   });
+}
+
+// Places the button used for swapping between Firebase and REST
+function placeDeliveryButton(method){
+  var signOutButton = document.getElementById("signOutButton");
+  var deliveryButton = document.createElement("button");
+  if(method === "rest"){
+    deliveryButton.innerText = "Reload the page w/ Firebase SDK delivery";
+    deliveryButton.onclick=function(){
+      firebase.database().ref("users/"+firebase.auth().currentUser.uid).update({method:"firebase"});
+      window.location.reload();
+    };
+  }else{
+    deliveryButton.innerText = "Reload the page w/ REST delivery";
+    deliveryButton.onclick=function(){
+      firebase.database().ref("users/"+firebase.auth().currentUser.uid).update({method:"rest"});
+      window.location.reload();
+    };
+  }
+    signOutButton.parentNode.insertBefore(deliveryButton,signOutButton.nextSibling);
 }

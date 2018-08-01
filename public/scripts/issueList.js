@@ -1,11 +1,9 @@
 // window.addEventListener("load",loadFromLocalDB);
 
-function loadIssues(issueList){
+function loadIssues(issueList,method){
   var issueListBody = document.getElementById("issueListBody");
-  var issue;
-
   for(var issue in issueList){
-    if(issueList[issue].id != 0){
+    if(issueList[issue].id){
       var issueID = issueList[issue].issueID;
       var newRow = document.createElement("tr");
       newRow.setAttribute("class","listItem_" + issueList[issue].status);
@@ -34,12 +32,18 @@ function loadIssues(issueList){
       var closeOrOpenButton = document.createElement("button");
       closeOrOpenButton.setAttribute("id","resolve"+issueID);
       if(issueList[issue].status == "open"){
-        // closeOrOpenButton.setAttribute("onclick","closeIssueFirebase("+issueID+")");
-        closeOrOpenButton.setAttribute("onclick","closeIssue("+issueID+")");
+        if(method === "firebase"){
+          closeOrOpenButton.setAttribute("onclick","closeIssueFirebase("+issueID+")");
+        } else {
+          closeOrOpenButton.setAttribute("onclick","closeIssue("+issueID+")");
+        }
         closeOrOpenButton.appendChild(document.createTextNode("Close Issue"));
       } else {
-        // closeOrOpenButton.setAttribute("onclick","openIssueFirebase("+issueID+")");
-        closeOrOpenButton.setAttribute("onclick","openIssue("+issueID+")");
+        if(method === "firebase"){
+          closeOrOpenButton.setAttribute("onclick","openIssueFirebase("+issueID+")");
+        } else {
+          closeOrOpenButton.setAttribute("onclick","openIssue("+issueID+")");
+        }
         closeOrOpenButton.appendChild(document.createTextNode("Open Issue"));
       }
       
@@ -132,10 +136,14 @@ function cancelDeletion(){
   var deletionModal = document.getElementById("deletionModal");
   deletionModal.hidden = true;
 }
-function confirmDeletion(){
+function confirmDeletion(method){
   var elIssueToDelete = document.getElementById("listItem" + numIssueToDelete);
   elIssueToDelete.parentNode.removeChild(elIssueToDelete);
-  deleteFromRestDB();
+  if(method === "firebase"){
+    deleteFromFirebase();
+  } else {
+    deleteFromRestDB();
+  }
   deletionModal.hidden = true;
 }
 
@@ -168,7 +176,7 @@ function loadFromRestDB(){
   xhr.setRequestHeader("Content-Type","application/json");
   xhr.onreadystatechange = function(){
     if(xhr.readyState == 4 && xhr.status == 200){
-      loadIssues(JSON.parse(xhr.responseText));
+      loadIssues(JSON.parse(xhr.responseText),"rest");
     }
   }
   xhr.send();
@@ -178,6 +186,25 @@ function loadFromFirebaseDB(uid){
   firebase.database().ref("/users/"+uid+"/issueList")
     .once("value")
       .then(function(snapshot){
-        loadIssues(snapshot.val());
+        loadIssues(snapshot.val(),"firebase");
       });
+}
+// Places the button used for swapping between Firebase and REST
+function placeDeliveryButton(method){
+  var signOutButton = document.getElementById("signOutButton");
+  var deliveryButton = document.createElement("button");
+  if(method === "rest"){
+    deliveryButton.innerText = "Reload the page w/ Firebase SDK delivery";
+    deliveryButton.onclick=function(){
+      firebase.database().ref("users/"+firebase.auth().currentUser.uid).update({method:"firebase"});
+      window.location.reload();
+    };
+  }else{
+    deliveryButton.innerText = "Reload the page w/ REST delivery";
+    deliveryButton.onclick=function(){
+      firebase.database().ref("users/"+firebase.auth().currentUser.uid).update({method:"rest"});
+      window.location.reload();
+    };
+  }
+    signOutButton.parentNode.insertBefore(deliveryButton,signOutButton.nextSibling);
 }
