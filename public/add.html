@@ -22,8 +22,31 @@
         firebase.initializeApp(config);
         firebase.auth().onAuthStateChanged(function(user) {
           if (user) {
-            var submitButton = document.getElementById("addSubmit");
-            submitButton.onclick=function(){addNewIssueToRestDB(user.uid)};
+            firebase.database().ref("users/"+user.uid+"/method").once("value").then(function(snapshot){
+                console.log(snapshot.val());
+                placeDeliveryButton(snapshot.val());
+                if(snapshot.val() === "rest"){
+                    if(document.readyState === "complete"){
+                        var submitButton = document.getElementById("addSubmit");
+                        submitButton.onclick=function(){addNewIssueToRestDB(user.uid)};
+                    }else{
+                        window.addEventListener("load",function(){
+                            var submitButton = document.getElementById("addSubmit");
+                            submitButton.onclick=function(){addNewIssueToRestDB(user.uid)};
+                        });
+                    }
+                }else{
+                    if(document.readyState === "complete"){
+                        var submitButton = document.getElementById("addSubmit");
+                        submitButton.onclick=function(){addNewIssueToFirebase(user.uid)};
+                    }else{
+                        window.addEventListener("load",function(){
+                            var submitButton = document.getElementById("addSubmit");
+                            submitButton.onclick=function(){addNewIssueToFirebase(user.uid)};
+                        });
+                    }
+                }
+            });
           } else {
             window.location.replace("index.html");
           }
@@ -32,7 +55,7 @@
         <script src="scripts/add.js"></script>
     </head>
     <body>
-        <button onclick="(function() {
+        <button id="signOutButton" onclick="(function() {
             firebase.auth().signOut().then(function() {
                 // Sign-out successful.
                 }).catch(function(error) {
@@ -65,9 +88,9 @@
                 <textarea id="addDescription" required></textarea>
             </label>
             <br>
-            
+            <input id="addSubmit" type="submit" value="Submit">
         </form>
-        <input id="addSubmit" type="submit" value="Submit">
+        
         <p>OR</p>
         <form action="issueslist.html" method="GET">
             <button>Return to Issues List</button>

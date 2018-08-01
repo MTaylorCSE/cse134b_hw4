@@ -62,6 +62,12 @@ function loadIssues(issueList,method){
       issueListBody.appendChild(newRow);
     }
   }
+  if(method === "rest"){
+    document.getElementById("deliveryMethodHeading").innerText = "REST";
+  } else {
+    document.getElementById("deliveryMethodHeading").innerText = "Firebase SDK";
+  }
+  
 }
 
 function closeIssue(item){
@@ -110,20 +116,14 @@ function openIssueFirebase(item){
 }
 function showAllIssues(){
   var showIssuesCheckbox = document.getElementById("showIssuesCheckbox");
-  var closedIssues = document.getElementsByClassName("listItem_closed");
-  var i = 0;
-  for(i; i < closedIssues.length; i++){
-      closedIssues.item(i).hidden = false;
-  }
+  var table = document.getElementById("issueTable");
+  table.className="showAll";
   showIssuesCheckbox.onclick = function(){showOnlyOpenIssues()};
 }
 function showOnlyOpenIssues(){
   var showIssuesCheckbox = document.getElementById("showIssuesCheckbox");
-  var closedIssues = document.getElementsByClassName("listItem_closed");
-  var i = 0;
-  for(i; i < closedIssues.length; i++){
-      closedIssues.item(i).hidden = true;
-  }
+  var table = document.getElementById("issueTable");
+  table.className="showOnlyOpen";
   showIssuesCheckbox.onclick = function(){showAllIssues()};
 }
 var numIssueToDelete;

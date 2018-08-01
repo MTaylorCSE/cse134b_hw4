@@ -66,3 +66,7 @@ tr.listItem_closed{
   background-color: #e0e0e0;
   font-style:italic;
 }
+
+table.showOnlyOpen tr.listItem_closed{
+  display:none;
+}

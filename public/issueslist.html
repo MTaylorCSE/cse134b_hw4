@@ -30,7 +30,7 @@
                     if(document.readyState === "complete"){
                         loadFromRestDB();
                         document.getElementById("confirmDeletion").onclick=function(){
-                            confirmDeletion(snapshot.val());
+                            confirmDeletion("rest");
                         };
                     }else{
                         window.addEventListener("load",function(){
@@ -45,14 +45,13 @@
                     if(document.readyState === "complete"){
                         loadFromFirebaseDB(user.uid);
                         document.getElementById("confirmDeletion").onclick=function(){
-                            confirmDeletion("rest");
+                            confirmDeletion("firebase");
                         };
                     }else{
                         window.addEventListener("load",function(){
-                        
                             loadFromFirebaseDB(user.uid);
                             document.getElementById("confirmDeletion").onclick=function(){
-                                confirmDeletion("rest");
+                                confirmDeletion("firebase");
                             };
                         });
                     }
@@ -74,7 +73,7 @@
                 console.log('Sign out error');
               });
         })()">Sign out</button>
-        <h1>Issue List</h1>
+        <h1>Issue List: <span id="deliveryMethodHeading"></span></h1>
         <noscript>
             <h2>Warning! If you're seeing this, you have JavaScript disabled. Opening, closing, and deleting issues will not work without JavaScript enabled.</h2>
         </noscript>
@@ -83,7 +82,7 @@
             <input type="submit" value="Add issue">
         </form>
         <label>Show All Issues<input id="showIssuesCheckbox" type="checkbox" checked onclick="showOnlyOpenIssues()"></label>
-        <table>
+        <table id="issueTable">
             <thead>
                 <tr>
                     <th>Issue ID</th>

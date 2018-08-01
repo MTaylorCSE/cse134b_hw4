@@ -78,3 +78,22 @@ function addNewIssueToFirebase(uid){
     firebase.database().ref("users/"+uid+"/issueList/").update({highestID:newIssueID});
   });
 }
+
+function placeDeliveryButton(method){
+  var signOutButton = document.getElementById("signOutButton");
+  var deliveryButton = document.createElement("button");
+  if(method === "rest"){
+    deliveryButton.innerText = "Reload the page w/ Firebase SDK delivery";
+    deliveryButton.onclick=function(){
+      firebase.database().ref("users/"+firebase.auth().currentUser.uid).update({method:"firebase"});
+      window.location.reload();
+    };
+  }else{
+    deliveryButton.innerText = "Reload the page w/ REST delivery";
+    deliveryButton.onclick=function(){
+      firebase.database().ref("users/"+firebase.auth().currentUser.uid).update({method:"rest"});
+      window.location.reload();
+    };
+  }
+    signOutButton.parentNode.insertBefore(deliveryButton,signOutButton.nextSibling);
+}

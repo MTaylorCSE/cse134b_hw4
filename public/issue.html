@@ -28,19 +28,23 @@
                 placeDeliveryButton(snapshot.val());
                 if(snapshot.val() === "rest"){
                     if(document.readyState === "complete"){
-                        document.getElementById("saveButton").onclick = function(){saveEditREST(true)}; 
+                        document.getElementById("saveButton").onclick = function(){saveEditREST(true)};
+                        getIssueContentFromLocalDB(urlParams.get("issue"));
                     }else{
                         window.addEventListener("load",function(){
                             document.getElementById("saveButton").onclick = function(){saveEditREST(true)}; 
+                            getIssueContentFromLocalDB(urlParams.get("issue"));
                         });
                     }
-                    getIssueContentFromLocalDB(urlParams.get("issue"));
+                    
                 }else{
                     if(document.readyState === "complete"){
                         document.getElementById("saveButton").onclick = function(){saveEditREST(false)}; 
+                        getIssueContentFromLocalDB(urlParams.get("issue"));
                     }else{
                         window.addEventListener("load",function(){
                             document.getElementById("saveButton").onclick = function(){saveEditREST(false)}; 
+                            getIssueContentFromLocalDB(urlParams.get("issue"));
                         });
                     }
                     getIssueContentFromFirebaseDB(urlParams.get("issue"),user.uid);
