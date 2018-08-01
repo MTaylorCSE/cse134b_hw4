@@ -2,12 +2,12 @@
 
 function loadIssues(issueList){
   var issueListBody = document.getElementById("issueListBody");
-  var i;
+  var issue;
 
-  for(i = 0; i < issueList.length; i++){
-    var issueID = issueList[i].issueID;
+  for(var issue in issueList){
+    var issueID = issueList[issue].issueID;
     var newRow = document.createElement("tr");
-    newRow.setAttribute("class","listItem_" + issueList[i].status);
+    newRow.setAttribute("class","listItem_" + issueList[issue].status);
     newRow.setAttribute("id","listItem"+issueID);
 
     var idCell = document.createElement("td");
@@ -16,23 +16,23 @@ function loadIssues(issueList){
 
     var issueLink = document.createElement("a");
     issueLink.setAttribute("href","issue.html?issue="+issueID);
-    issueLink.appendChild(document.createTextNode(issueList[i].issueName));
+    issueLink.appendChild(document.createTextNode(issueList[issue].issueName));
     
     var issueLinkCell = document.createElement("td");
     issueLinkCell.appendChild(issueLink);
     newRow.appendChild(issueLinkCell);
 
     var issueTypeCell = document.createElement("td");
-    issueTypeCell.appendChild(document.createTextNode(issueList[i].issueType));
+    issueTypeCell.appendChild(document.createTextNode(issueList[issue].issueType));
     newRow.appendChild(issueTypeCell);
 
     var issueDescriptionCell = document.createElement("td");
-    issueDescriptionCell.appendChild(document.createTextNode(issueList[i].issueDescription));
+    issueDescriptionCell.appendChild(document.createTextNode(issueList[issue].issueDescription));
     newRow.appendChild(issueDescriptionCell);
     
     var closeOrOpenButton = document.createElement("button");
     closeOrOpenButton.setAttribute("id","resolve"+issueID);
-    if(issueList[i].status == "open"){
+    if(issueList[issue].status == "open"){
       closeOrOpenButton.setAttribute("onclick","closeIssue("+issueID+")");
       closeOrOpenButton.appendChild(document.createTextNode("Close Issue"));
     } else {

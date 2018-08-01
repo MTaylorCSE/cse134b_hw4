@@ -22,19 +22,14 @@
         firebase.initializeApp(config);
         firebase.auth().onAuthStateChanged(function(user) {
           if (user) {
-            
+            var urlParams = new URLSearchParams(window.location.search);
+            getIssueContentFromFirebaseDB(parseInt(urlParams.get('issue')),user.uid);
           } else {
             window.location.replace("index.html");
           }
         });
-        
-        
         </script>
         <script src="scripts/issueContent.js"></script>
-        <script>
-            var urlParams = new URLSearchParams(window.location.search);
-            getIssueContentFromDB(parseInt(urlParams.get('issue')));
-        </script>
     </head>
     <body>
         <button onclick="(function() {
@@ -62,7 +57,6 @@
         </section>
         <pre contenteditable="false" id="issueDescription">
 </pre>
-
         <a id="imageLink" href="#"><div><img height="400px" id="issueImage" alt="Oops!"></div></a>
         <noscript>
             <p>Warning! If you're seeing this, you have JavaScript disabled. Editing issues will not work without JavaScript enabled.</p>
@@ -72,10 +66,6 @@
         <button hidden id="saveButton" onclick="saveEdit()">Save</button>
         <button hidden id="cancelButton" onclick="cancelEdit()">Cancel</button>
         </div>
-
-        
-        
-        
     </body>
     
 </html>
