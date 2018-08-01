@@ -3,6 +3,7 @@ var current_issue_index;
 var issueDescription, saveButton, cancelButton, editButton, issueName_title,
 issueName_heading, issueType, selectIssueType, defaultOptionIssueType,
 preEditIssueType, preEditContent, preEditIssueName;
+var cur_uid;
 
 /**
  * Adds an event listener for the page load to get these DOM elements
@@ -64,7 +65,7 @@ function editMode(){
   preEditIssueName = issueName_heading.innerText;
 }
 
-function saveEdit(){
+function saveEditVisual(){
   // Visual display stuff
   editButton.hidden = false;
   saveButton.hidden = true;
@@ -79,7 +80,17 @@ function saveEdit(){
   preEditContent = issueDescription.innerText;
   preEditIssueName = issueName_heading.innerText;
   issueName_title.innerText = issueName_heading.innerText;
-  saveEditDB();
+  
+}
+
+function saveEdit(local){
+  if(local){
+    saveEditVisual();
+    saveEditRestDB();
+  }else{
+    saveEditVisual();
+    saveEditFirebase();
+  }
 }
 
 function cancelEdit(){
@@ -96,8 +107,20 @@ function cancelEdit(){
 }
 
 
-// Saves edited content to the DB, which is really just an object in memory on this page right now
-function saveEditDB(){
+function saveEditFirebase(){
+  issue_contents.issue_type = issueType.innerText;
+  issue_contents.issue_name = issueName_heading.innerText;
+  issue_contents.issue_description = issueDescription.innerText;
+
+  var updates = {};
+  updates['users/'+cur_uid+'/issueContents/'+current_issue_index+'/issue_name'] = issue_contents.issue_name;
+  updates['users/'+cur_uid+'/issueContents/'+current_issue_index+'/issue_type'] = issue_contents.issue_type;
+  updates['users/'+cur_uid+'/issueContents/'+current_issue_index+'/issue_description'] = issue_contents.issue_description;
+  firebase.database().ref().update(updates);
+}
+
+// Saves edited content to the local JSON db hosted with JSON-server
+function saveEditRestDB(){
   issue_contents.issue_type = issueType.innerText;
   issue_contents.issue_name = issueName_heading.innerText;
   issue_contents.issue_description = issueDescription.innerText;
@@ -146,10 +169,10 @@ function getIssueContentFromLocalDB(issue_number){
 }
 
 function getIssueContentFromFirebaseDB(issue_number,uid){
+  cur_uid = uid;
   current_issue_index = issue_number;
-  var ref = firebase.database().ref("users/"+uid+"/issueContents/").orderByChild("id").equalTo(issue_number);
-  console.log(ref);
+  var ref = firebase.database().ref("users/"+uid+"/issueContents/"+issue_number);
   ref.once("value").then(function(snapshot){
-    loadIssueContents(snapshot.val()[0]);
+    loadIssueContents(snapshot.val());
   });
 }
