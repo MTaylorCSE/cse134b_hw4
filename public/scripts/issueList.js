@@ -5,54 +5,58 @@ function loadIssues(issueList){
   var issue;
 
   for(var issue in issueList){
-    var issueID = issueList[issue].issueID;
-    var newRow = document.createElement("tr");
-    newRow.setAttribute("class","listItem_" + issueList[issue].status);
-    newRow.setAttribute("id","listItem"+issueID);
+    if(issueList[issue].id != 0){
+      var issueID = issueList[issue].issueID;
+      var newRow = document.createElement("tr");
+      newRow.setAttribute("class","listItem_" + issueList[issue].status);
+      newRow.setAttribute("id","listItem"+issueID);
 
-    var idCell = document.createElement("td");
-    idCell.appendChild(document.createTextNode(issueID));
-    newRow.appendChild(idCell);
+      var idCell = document.createElement("td");
+      idCell.appendChild(document.createTextNode(issueID));
+      newRow.appendChild(idCell);
 
-    var issueLink = document.createElement("a");
-    issueLink.setAttribute("href","issue.html?issue="+issueID);
-    issueLink.appendChild(document.createTextNode(issueList[issue].issueName));
-    
-    var issueLinkCell = document.createElement("td");
-    issueLinkCell.appendChild(issueLink);
-    newRow.appendChild(issueLinkCell);
+      var issueLink = document.createElement("a");
+      issueLink.setAttribute("href","issue.html?issue="+issueID);
+      issueLink.appendChild(document.createTextNode(issueList[issue].issueName));
+      
+      var issueLinkCell = document.createElement("td");
+      issueLinkCell.appendChild(issueLink);
+      newRow.appendChild(issueLinkCell);
 
-    var issueTypeCell = document.createElement("td");
-    issueTypeCell.appendChild(document.createTextNode(issueList[issue].issueType));
-    newRow.appendChild(issueTypeCell);
+      var issueTypeCell = document.createElement("td");
+      issueTypeCell.appendChild(document.createTextNode(issueList[issue].issueType));
+      newRow.appendChild(issueTypeCell);
 
-    var issueDescriptionCell = document.createElement("td");
-    issueDescriptionCell.appendChild(document.createTextNode(issueList[issue].issueDescription));
-    newRow.appendChild(issueDescriptionCell);
-    
-    var closeOrOpenButton = document.createElement("button");
-    closeOrOpenButton.setAttribute("id","resolve"+issueID);
-    if(issueList[issue].status == "open"){
-      closeOrOpenButton.setAttribute("onclick","closeIssue("+issueID+")");
-      closeOrOpenButton.appendChild(document.createTextNode("Close Issue"));
-    } else {
-      closeOrOpenButton.setAttribute("onclick","openIssue("+issueID+")");
-      closeOrOpenButton.appendChild(document.createTextNode("Open Issue"));
+      var issueDescriptionCell = document.createElement("td");
+      issueDescriptionCell.appendChild(document.createTextNode(issueList[issue].issueDescription));
+      newRow.appendChild(issueDescriptionCell);
+      
+      var closeOrOpenButton = document.createElement("button");
+      closeOrOpenButton.setAttribute("id","resolve"+issueID);
+      if(issueList[issue].status == "open"){
+        // closeOrOpenButton.setAttribute("onclick","closeIssueFirebase("+issueID+")");
+        closeOrOpenButton.setAttribute("onclick","closeIssue("+issueID+")");
+        closeOrOpenButton.appendChild(document.createTextNode("Close Issue"));
+      } else {
+        // closeOrOpenButton.setAttribute("onclick","openIssueFirebase("+issueID+")");
+        closeOrOpenButton.setAttribute("onclick","openIssue("+issueID+")");
+        closeOrOpenButton.appendChild(document.createTextNode("Open Issue"));
+      }
+      
+      closeOrOpenButtonCell = document.createElement("td");
+      closeOrOpenButtonCell.appendChild(closeOrOpenButton);
+      newRow.appendChild(closeOrOpenButtonCell);
+
+      var deleteButton = document.createElement("button");
+      deleteButton.setAttribute("onclick","openDeletionConfirmation("+issueID+")");
+      deleteButton.appendChild(document.createTextNode("Delete"));
+
+      var deleteButtonCell = document.createElement("td");
+      deleteButtonCell.appendChild(deleteButton);
+      newRow.appendChild(deleteButtonCell);
+
+      issueListBody.appendChild(newRow);
     }
-    
-    closeOrOpenButtonCell = document.createElement("td");
-    closeOrOpenButtonCell.appendChild(closeOrOpenButton);
-    newRow.appendChild(closeOrOpenButtonCell);
-
-    var deleteButton = document.createElement("button");
-    deleteButton.setAttribute("onclick","openDeletionConfirmation("+issueID+")");
-    deleteButton.appendChild(document.createTextNode("Delete"));
-
-    var deleteButtonCell = document.createElement("td");
-    deleteButtonCell.appendChild(deleteButton);
-    newRow.appendChild(deleteButtonCell);
-
-    issueListBody.appendChild(newRow);
   }
 }
 
@@ -79,6 +83,26 @@ function openIssue(item){
   xhr_set_open.open("PATCH","http://localhost:3000/issueList/"+item,true);
   xhr_set_open.setRequestHeader("Content-Type","application/json");
   xhr_set_open.send(JSON.stringify({status:"open"}));
+}
+
+function closeIssueFirebase(item){
+  var itemToClose = document.getElementById("listItem" + item);
+  itemToClose.style = "font-style: italic";
+  itemToClose.className = "listItem_closed";
+  var resolveButton = document.getElementById("resolve"+item);
+  resolveButton.innerText = "Open Issue";
+  resolveButton.onclick = function(){openIssue(item)};
+  firebase.database().ref("users/"+firebase.auth().currentUser.uid+"/issueList/"+item).update({status:"closed"});
+}
+
+function openIssueFirebase(item){
+  var itemToOpen = document.getElementById("listItem" + item);
+  itemToOpen.style = "font-style: normal";
+  itemToOpen.className = "listItem_open";
+  var resolveButton = document.getElementById("resolve"+item);
+  resolveButton.innerText = "Close Issue";
+  resolveButton.onclick = function(){closeIssue(item)};
+  firebase.database().ref("users/"+firebase.auth().currentUser.uid+"/issueList/"+item).update({status:"open"});
 }
 function showAllIssues(){
   var showIssuesCheckbox = document.getElementById("showIssuesCheckbox");
@@ -111,7 +135,7 @@ function cancelDeletion(){
 function confirmDeletion(){
   var elIssueToDelete = document.getElementById("listItem" + numIssueToDelete);
   elIssueToDelete.parentNode.removeChild(elIssueToDelete);
-  deleteFromDB();
+  deleteFromRestDB();
   deletionModal.hidden = true;
 }
 
@@ -120,20 +144,28 @@ function checkID(issue){
   return issue.issueID == numIssueToDelete;
 }
 
-function deleteFromDB(){
+function deleteFromRestDB(){
   var xhr_delete_issue_list_item = new XMLHttpRequest();
   xhr_delete_issue_list_item.open("DELETE","http://localhost:3000/issueList/"+numIssueToDelete,true);
+  xhr_delete_issue_list_item.setRequestHeader("Content-Type","application/json");
   xhr_delete_issue_list_item.send();
 
   var xhr_delete_issue_contents = new XMLHttpRequest();
   xhr_delete_issue_contents.open("DELETE","http://localhost:3000/issueContents/"+numIssueToDelete,true);
+  xhr_delete_issue_contents.setRequestHeader("Content-Type","application/json");
   xhr_delete_issue_contents.send();
 
 }
 
-function loadFromLocalDB(){
+function deleteFromFirebase(){
+  firebase.database().ref("users/"+firebase.auth().currentUser.uid+"/issueList/"+numIssueToDelete).remove();
+  firebase.database().ref("users/"+firebase.auth().currentUser.uid+"/issueContents/"+numIssueToDelete).remove();
+}
+
+function loadFromRestDB(){
   var xhr = new XMLHttpRequest();
   xhr.open("GET","http://localhost:3000/issueList",true);
+  xhr.setRequestHeader("Content-Type","application/json");
   xhr.onreadystatechange = function(){
     if(xhr.readyState == 4 && xhr.status == 200){
       loadIssues(JSON.parse(xhr.responseText));

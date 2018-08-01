@@ -23,7 +23,7 @@
         firebase.auth().onAuthStateChanged(function(user) {
           if (user) {
             var database = firebase.database();
-            window.addEventListener("load",loadFromFirebaseDB(user.uid));
+            window.addEventListener("load",loadFromRestDB(user.uid));
           } else {
             window.location.replace("index.html");
           }

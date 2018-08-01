@@ -40,6 +40,7 @@
                 console.log('Sign out error');
                 });
         })()">Sign out</button>
+        <button>Reload and Use REST w/ db.json</button>
         <h1>Issue Name: <span id="issueName_heading"></span></h1>
         <section>
             <h2>Issue Type: 
@@ -63,9 +64,13 @@
         </noscript>
         <div>
         <button id="editButton" onclick="editMode()">Edit</button>
-        <button hidden id="saveButton" onclick="saveEdit(false)">Save</button>
+        <button hidden id="saveButton" onclick="saveEdit(true)">Save</button>
         <button hidden id="cancelButton" onclick="cancelEdit()">Cancel</button>
         </div>
+        <p>OR</p>
+        <form action="issueslist.html" method="GET">
+            <button>Return to Issues List</button>
+        </form>
     </body>
     
 </html>

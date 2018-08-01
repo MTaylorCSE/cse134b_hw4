@@ -1,14 +1,15 @@
 {
-  "issueContents": {
-    "1": {
+  "issueContents": [
+    null,
+    {
       "id": 1,
-      "issue_description": "This logo looks like someone attacked a box of crayons\nwith a curling iron. Whoever drew this needs a stern\ntalking to.",
+      "issue_description": "This logo looks like someone attacked a box of crayons\nwith a curling iron. Whoever drew this needs a stern\ntalking to. Test edit.",
       "issue_image_alt": "A terribly drawn version of the Google Chrome logo",
       "issue_image_src": "logo.gif",
       "issue_name": "Terrible Logo",
-      "issue_type": "Visual"
+      "issue_type": "Functionality"
     },
-    "2": {
+    {
       "id": 2,
       "issue_description": "Now the terrible logo that idiot drew won't even show up\non the issue page. I bet he wrote the code for this website\ntoo, judging by the looks of it.\n",
       "issue_image_alt": "A screenshot of issue 1, Terrible Logo, with the image missing and the alt text showing.",
@@ -16,25 +17,21 @@
       "issue_name": "Terrible Logo Broken Image",
       "issue_type": "Other"
     },
-    "3": {
+    {
       "id": 3,
       "issue_description": "Look at this picture of a cat. It's beautiful. It\nisn't as beautiful in Firefox. There, it's just my\nalt text.",
       "issue_image_alt": "A screenshot of this webpage in Firefox, where the alt text is showing for the cat image.",
       "issue_image_src": "nocat.jpeg",
       "issue_name": "WebP Image in Firefox",
       "issue_type": "Functionality"
-    },
-    "4": {
-      "id": 4,
-      "issue_description": "Click the edit button below to change this default text.",
-      "issue_image_alt": "A placeholder image.",
-      "issue_image_src": "stockimage.jpeg",
-      "issue_name": "Another issue",
-      "issue_type": "Visual"
     }
-  },
-  "issueList": {
-    "1": {
+  ],
+  "issueList": [
+    {
+      "highestID": 3,
+      "id": 0
+    },
+    {
       "id": 1,
       "issueDescription": "Who even drew this?",
       "issueID": 1,
@@ -42,7 +39,7 @@
       "issueType": "Visual",
       "status": "open"
     },
-    "2": {
+    {
       "id": 2,
       "issueDescription": "Great, the logo we didn't even want to see isn't appearing on the page.",
       "issueID": 2,
@@ -50,21 +47,13 @@
       "issueType": "Other",
       "status": "open"
     },
-    "3": {
+    {
       "id": 3,
       "issueDescription": "This WebP image of a cat doesn't work in Firefox.",
       "issueID": 3,
       "issueName": "WebP Image in Firefox",
       "issueType": "Functionality",
       "status": "open"
-    },
-    "4": {
-      "id": 4,
-      "issueDescription": "Another issue indeed\n",
-      "issueID": 4,
-      "issueName": "Another issue",
-      "issueType": "Visual",
-      "status": "open"
     }
-  }
+  ]
 }

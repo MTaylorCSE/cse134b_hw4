@@ -9,4 +9,5 @@ function firebaseSignup(){
     console.log(errorCode);
     console.log(errorMessage);
   });
+  
 }

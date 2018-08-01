@@ -22,7 +22,8 @@
         firebase.initializeApp(config);
         firebase.auth().onAuthStateChanged(function(user) {
           if (user) {
-            console.log(user.email);
+            var submitButton = document.getElementById("addSubmit");
+            submitButton.onclick=function(){addNewIssueToRestDB(user.uid)};
           } else {
             window.location.replace("index.html");
           }
@@ -64,9 +65,12 @@
                 <textarea id="addDescription" required></textarea>
             </label>
             <br>
-            <input id="addSubmit" onclick="addNewIssueToDB()" type="submit" value="Submit">
+            
         </form>
-        
-        
+        <input id="addSubmit" type="submit" value="Submit">
+        <p>OR</p>
+        <form action="issueslist.html" method="GET">
+            <button>Return to Issues List</button>
+        </form>
     </body>
 </html>

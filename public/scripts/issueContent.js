@@ -119,7 +119,7 @@ function saveEditFirebase(){
   firebase.database().ref().update(updates);
 }
 
-// Saves edited content to the local JSON db hosted with JSON-server
+// Saves edited content to some DB using RESTful style
 function saveEditRestDB(){
   issue_contents.issue_type = issueType.innerText;
   issue_contents.issue_name = issueName_heading.innerText;
@@ -127,8 +127,8 @@ function saveEditRestDB(){
 
   // Updating issue list item
   var xhr_issue_list_item = new XMLHttpRequest();
-  xhr_issue_list_item.open("PATCH","http://localhost:3000/issueList/" + current_issue_index,true);
-  xhr_issue_list_item.setRequestHeader("Content-Type","application/json");
+  xhr_issue_list_item.open("PATCH","http://localhost:3000/issueList/"+current_issue_index,true);
+  xhr_issue_list_item.setRequestHeader("Content-Type","application/JSON");
   xhr_issue_list_item.onreadystatechange = function(){
     if(xhr_issue_list_item.status == 200 && xhr_issue_list_item.readyState == 4){
       console.log("Ready for inspection, sire.");
@@ -144,11 +144,11 @@ function saveEditRestDB(){
 
   // Updating issue contents
   var xhr_issue_contents = new XMLHttpRequest();
-  xhr_issue_contents.open("PUT","http://localhost:3000/issueContents/" + current_issue_index,true);
-  xhr_issue_contents.setRequestHeader("Content-Type","application/json");
+  xhr_issue_contents.open("PUT","http://localhost:3000/issueContents/"+current_issue_index,true);
+  xhr_issue_contents.setRequestHeader("Content-Type","application/JSON");
   xhr_issue_contents.onreadystatechange = function(){
     if(xhr_issue_contents.readyState == 4 && xhr_issue_contents.status == 200){
-      
+      console.log("Issue contents sent, sire.");
     }
   }
   xhr_issue_contents.send(JSON.stringify(issue_contents));
