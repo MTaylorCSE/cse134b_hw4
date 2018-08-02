@@ -24,27 +24,11 @@
       "issue_image_src": "nocat.jpeg",
       "issue_name": "WebP Image in Firefox",
       "issue_type": "Functionality"
-    },
-    {
-      "id": 4,
-      "issue_name": "It's an issue",
-      "issue_type": "Visual",
-      "issue_description": "Click the edit button below to change this default text.",
-      "issue_image_src": "stockimage.jpeg",
-      "issue_image_alt": "A placeholder image."
-    },
-    {
-      "id": 5,
-      "issue_name": "It's another issue!",
-      "issue_type": "Visual",
-      "issue_description": "Click the edit button below to change this default text.",
-      "issue_image_src": "stockimage.jpeg",
-      "issue_image_alt": "A placeholder image."
     }
   ],
   "issueList": [
     {
-      "highestID": 6,
+      "highestID": 3,
       "id": 0
     },
     {
@@ -70,22 +54,6 @@
       "issueName": "WebP Image in Firefox",
       "issueType": "Functionality",
       "status": "open"
-    },
-    {
-      "id": 4,
-      "status": "open",
-      "issueID": 4,
-      "issueName": "It's an issue",
-      "issueType": "Visual",
-      "issueDescription": "Issue baby"
-    },
-    {
-      "id": 5,
-      "status": "open",
-      "issueID": 5,
-      "issueName": "It's another issue!",
-      "issueType": "Visual",
-      "issueDescription": "that boi"
     }
   ]
 }

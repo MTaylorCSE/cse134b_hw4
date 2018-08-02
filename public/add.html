@@ -73,12 +73,11 @@
             <br>
             <label>
                 Issue Type<br>
-                <select id="addType" required>
-                    <optgroup label="Select an option">
-                        <option>Visual</option>
-                        <option>Functionality</option>
-                        <option>Other</option>
-                    </optgroup>
+                <select id="addType" size="1" required>
+                    <option hidden label="Select a Type"></option>
+                    <option>Visual</option>
+                    <option>Functionality</option>
+                    <option>Other</option>
                 </select>
             </label>
             <br>
@@ -88,9 +87,8 @@
                 <textarea id="addDescription" required></textarea>
             </label>
             <br>
-            <input id="addSubmit" type="submit" value="Submit">
         </form>
-        
+        <input id="addSubmit" type="submit" value="Submit">
         <p>OR</p>
         <form action="issueslist.html" method="GET">
             <button>Return to Issues List</button>

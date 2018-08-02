@@ -27,7 +27,7 @@ function addNewIssueToRestDB(uid){
         issue_name:newIssueName,
         issue_type:newIssueType,
         issue_description:"Click the edit button below to change this default text.",
-        issue_image_src:"stockimage.jpeg",
+        issue_image_src:"stockimage.png",
         issue_image_alt:"A placeholder image."
       }
 
@@ -47,9 +47,11 @@ function addNewIssueToRestDB(uid){
       xhr_update_highest_ID.open("PATCH","http://localhost:3000/issueList/0",true);
       xhr_update_highest_ID.setRequestHeader("Content-Type","application/json");
       xhr_update_highest_ID.send(JSON.stringify({highestID:nextID}));
+      window.location.replace("issueslist.html");
     }
   }
   xhr_get_last_ID.send();
+  
 }
 
 function addNewIssueToFirebase(uid){
@@ -72,11 +74,13 @@ function addNewIssueToFirebase(uid){
       issue_name:newIssueName,
       issue_type:newIssueType,
       issue_description:"Click the edit button below to change this default text.",
-      issue_image_src:"stockimage.jpeg",
+      issue_image_src:"stockimage.png",
       issue_image_alt:"A placeholder image."
     });
     firebase.database().ref("users/"+uid+"/issueList/").update({highestID:newIssueID});
+    window.location.replace("issueslist.html")
   });
+  
 }
 
 function placeDeliveryButton(method){

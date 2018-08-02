@@ -45,7 +45,7 @@ function loadIssueContents(issueContents) {
   issueName_title.innerText = issue_contents.issue_name;
   issueName_heading.innerText = issue_contents.issue_name;
   issueDescription.innerText = issue_contents.issue_description;
-  defaultOptionIssueType.innerText = issue_contents.issue_type;
+  defaultOptionIssueType.label = issue_contents.issue_type;
   issueImage.src = issue_contents.issue_image_src;
   issueImage.alt = issue_contents.issue_image_alt
 }
