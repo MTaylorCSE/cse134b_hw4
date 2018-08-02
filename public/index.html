@@ -32,6 +32,11 @@
         
     </script>
     <script src="scripts/login.js"></script>
+    <script>
+      if(navigator.serviceWorker){
+        navigator.serviceWorker.register('sw.js');
+      }
+    </script>
   </head>
   <body>
     <h1 id="welcomeHeading">---Welcome to My Issue Tracker---</h1>
