@@ -31,7 +31,7 @@ window.addEventListener("load",function(){
  */
 function loadIssueContents(issueContents) {
   issue_contents = issueContents;
-  console.log(issue_contents);
+  
   var issueDescription = document.getElementById('issueDescription');
   var issueName_title = document.getElementById('issueName_title');
   var issueName_heading = document.getElementById('issueName_heading');
@@ -132,7 +132,7 @@ function saveEditRestDB(){
   xhr_issue_list_item.setRequestHeader("Content-Type","application/JSON");
   xhr_issue_list_item.onreadystatechange = function(){
     if(xhr_issue_list_item.status == 200 && xhr_issue_list_item.readyState == 4){
-      console.log("Ready for inspection, sire.");
+    
     }
   }
 
@@ -149,7 +149,7 @@ function saveEditRestDB(){
   xhr_issue_contents.setRequestHeader("Content-Type","application/JSON");
   xhr_issue_contents.onreadystatechange = function(){
     if(xhr_issue_contents.readyState == 4 && xhr_issue_contents.status == 200){
-      console.log("Issue contents sent, sire.");
+     
     }
   }
   xhr_issue_contents.send(JSON.stringify(issue_contents));

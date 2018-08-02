@@ -23,8 +23,9 @@
         firebase.auth().onAuthStateChanged(function(user) {
           if (user) {
             var database = firebase.database();
+            
             firebase.database().ref("users/"+user.uid+"/method").once("value").then(function(snapshot){
-                console.log(snapshot.val());
+               
                 placeDeliveryButton(snapshot.val());
                 if(snapshot.val() === "rest"){
                     if(document.readyState === "complete"){

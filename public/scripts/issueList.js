@@ -2,6 +2,7 @@
 
 function loadIssues(issueList,method){
   var issueListBody = document.getElementById("issueListBody");
+  
   for(var issue in issueList){
     if(issueList[issue].id){
       var issueID = issueList[issue].issueID;
